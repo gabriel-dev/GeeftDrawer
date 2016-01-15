@@ -1,8 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#FF0E7CF9</color>
-    <color name="colorPrimaryDark">#0052af</color>
-    <color name="colorAccent">#FF0E7CF9</color>
+    <!--<color name="colorPrimary">#FF0E7CF9</color>-->
+    <!--<color name="colorPrimaryDark">#0052af</color>-->
+    <!--<color name="colorAccent">#FF0E7CF9</color>-->
+    <!--<color name="clickAccent">#8dd4d4d4</color>   -->
+    <color name="colorPrimary">#5e00e1</color>
+    <color name="colorPrimaryDark">#4d00b9</color>
+    <color name="colorAccent">#6c1bde</color>
+    <color name="clickAccent">#8dd4d4d4</color>
     <!--<color name="colorPrimary">#ff8f20</color>-->
     <!--<color name="colorPrimaryDark">#e77700</color>-->
     <!--<color name="colorAccent">#ff8f20</color>-->

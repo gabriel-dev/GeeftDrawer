@@ -2,7 +2,6 @@ package com.gabrieldev.geeftdrawer;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.Snackbar;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -58,8 +57,8 @@ public class MainActivity extends AppCompatActivity
             @Override
             public void onClick(View v) {
                 Toast.makeText(getApplicationContext(), "Activity to 'Add Geeft' started", Toast.LENGTH_SHORT).show();
-//                Intent intent = new Intent(MainActivity.this, AddGeeft.class);
-//                startActivity(intent);
+                Intent intent = new Intent(MainActivity.this, AddGeeft.class);
+                startActivity(intent);
             }
         });
         FloatingActionButton actionGeeftAroundMe = (FloatingActionButton) findViewById(R.id.geeft_around_me_button);

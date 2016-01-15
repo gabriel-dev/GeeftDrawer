@@ -4,6 +4,7 @@ import android.annotation.TargetApi;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.graphics.Color;
 import android.os.Build;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
@@ -15,7 +16,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.gabrieldev.geeftdrawer.MainActivity;
 import com.gabrieldev.geeftdrawer.R;
 import com.gabrieldev.geeftdrawer.model.Geeft;
 
@@ -29,6 +29,10 @@ public class GeeftAdapter extends RecyclerView.Adapter<GeeftAdapter.ViewHolder>{
     private List<Geeft> geefts;
     private int rowLayout;
     private Context mContext;
+
+    public void setContext(Context context) {
+        mContext = context;
+    }
 
     public GeeftAdapter(List<Geeft> geefts, int rowLayout, Context context) {
         this.geefts = geefts;
@@ -50,25 +54,26 @@ public class GeeftAdapter extends RecyclerView.Adapter<GeeftAdapter.ViewHolder>{
     @Override
     public void onBindViewHolder(final ViewHolder viewHolder, int i) {
         Geeft geeft = geefts.get(i);
-        viewHolder.geeftName.setText(geeft.name);
-        viewHolder.geefterName.setText(geeft.geefter);
-        viewHolder.geeftDescription.setText(geeft.description);
-        viewHolder.geeftDescription.setSingleLine(true);
-        viewHolder.geeftDescription.setEllipsize(TextUtils.TruncateAt.END);
+        viewHolder.getGeeftName().setText(geeft.getName());
+        viewHolder.getGeefterName().setText(geeft.getGeefter());
+        viewHolder.getGeeftDescription().setText(geeft.getDescription());
+        viewHolder.getGeeftDescription().setSingleLine(true);
+        viewHolder.getGeeftDescription().setEllipsize(TextUtils.TruncateAt.END);
 
 
         //Every listened of the card , need to initialize here
         //Image Buttons///////////////
-        viewHolder.geeftReservationButton.setOnClickListener(new View.OnClickListener() {
+        viewHolder.getGeeftReservationButton().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Toast.makeText(mContext, "Reservation button to set", Toast.LENGTH_SHORT).show();
+                viewHolder.getGeeftReservationButton().setColorFilter(R.color.colorAccent);
             }
         });
         //////////////////////////////
 
         //Text Dialog/////////////////
-        viewHolder.geefterName.setOnClickListener(new View.OnClickListener() {
+        viewHolder.getGeefterName().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 AlertDialog.Builder alertDialog = new AlertDialog.Builder(mContext); //Read Update
@@ -79,8 +84,9 @@ public class GeeftAdapter extends RecyclerView.Adapter<GeeftAdapter.ViewHolder>{
                     }
                 });
 
+                //On click, the user visualize can visualize some infos about the geefter
                 AlertDialog dialog = alertDialog.create();
-                dialog.setTitle(viewHolder.geefterName.getText());
+                dialog.setTitle(viewHolder.getGeefterName().getText());
                 dialog.setMessage("Some information that we can take from the facebook shared one");
 
                 dialog.show();  //<-- See This!
@@ -89,15 +95,15 @@ public class GeeftAdapter extends RecyclerView.Adapter<GeeftAdapter.ViewHolder>{
         //////////////////////////////
 
         //Text Expander///////////////
-        viewHolder.geeftDescription.setOnClickListener(new View.OnClickListener() {
+        viewHolder.getGeeftDescription().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                viewHolder.geeftDescription.setSingleLine(false);
+                viewHolder.getGeeftDescription().setSingleLine(false);
             }
         });
         //////////////////////////////
 
-//        viewHolder.geeftImage.setImageDrawable(mContext.getDrawable(geeft.getImageResourceId(mContext)));
+//        viewHolder.mGeeftImage.setImageDrawable(mContext.getDrawable(geeft.getImageResourceId(mContext)));
 
     }
 
@@ -107,19 +113,43 @@ public class GeeftAdapter extends RecyclerView.Adapter<GeeftAdapter.ViewHolder>{
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        public TextView geeftName;
-        public TextView geefterName;
-        public TextView geeftDescription;
-        public ImageView geeftImage;
-        public ImageButton geeftReservationButton;
+        private TextView mGeeftName;
+        private TextView mGeefterName;
+        private TextView mGeeftDescription;
+        private ImageView mGeeftImage;
+        private ImageButton mGeeftReservationButton;
+
+        public TextView getGeeftName() {
+            return mGeeftName;
+        }
+
+
+        public TextView getGeefterName() {
+            return mGeefterName;
+        }
+
+        public TextView getGeeftDescription() {
+            return mGeeftDescription;
+        }
+
+
+        public ImageView getGeeftImage() {
+            return mGeeftImage;
+        }
+
+
+        public ImageButton getGeeftReservationButton() {
+            return mGeeftReservationButton;
+        }
+
 
         public ViewHolder(View itemView) {
             super(itemView);
-            geeftName = (TextView) itemView.findViewById(R.id.geeft_name);
-            geefterName = (TextView) itemView.findViewById(R.id.geefter_name);
-            geeftDescription = (TextView)itemView.findViewById(R.id.geeft_description);
-            geeftImage = (ImageView)itemView.findViewById(R.id.geeft_image);
-            geeftReservationButton = (ImageButton) itemView.findViewById(R.id.like_reservation);
+            mGeeftName = (TextView) itemView.findViewById(R.id.geeft_name);
+            mGeefterName = (TextView) itemView.findViewById(R.id.geefter_name);
+            mGeeftDescription = (TextView) itemView.findViewById(R.id.geeft_description);
+            mGeeftImage = (ImageView) itemView.findViewById(R.id.geeft_image);
+            mGeeftReservationButton = (ImageButton) itemView.findViewById(R.id.geeft_like_reservation_button);
         }
 
     }

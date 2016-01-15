@@ -8,16 +8,33 @@ import android.content.Context;
  */
 public class Geeft {
 
-    public String name;
-    public String geefter;
-    public String description;
-    public String imageName;
+    private String mName;
+    private String mGeefter;
+
+    public String getName() {
+        return mName;
+    }
+
+    public String getGeefter() {
+        return mGeefter;
+    }
+
+    public String getDescription() {
+        return mDescription;
+    }
+
+    public String getImageName() {
+        return mImageName;
+    }
+
+    private String mDescription;
+    private String mImageName;
 
 
     public int getImageResourceId(Context context)
     {
         try {
-            return context.getResources().getIdentifier(this.imageName, "drawable", context.getPackageName());
+            return context.getResources().getIdentifier(this.mImageName, "drawable", context.getPackageName());
 
         } catch (Exception e) {
             e.printStackTrace();
