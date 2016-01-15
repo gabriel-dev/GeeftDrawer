@@ -23,8 +23,25 @@ public class Geeft {
         return mDescription;
     }
 
+    public void setName(String name) {
+        mName = name;
+    }
+
+    public void setGeefter(String geefter) {
+        mGeefter = geefter;
+    }
+
+    public void setDescription(String description) {
+        mDescription = description;
+    }
+
+    public void setImageName(String imageName) {
+        mImageName = imageName;
+    }
+
     public String getImageName() {
         return mImageName;
+
     }
 
     private String mDescription;

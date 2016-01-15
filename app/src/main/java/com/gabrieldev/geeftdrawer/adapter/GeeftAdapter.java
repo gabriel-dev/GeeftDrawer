@@ -59,49 +59,8 @@ public class GeeftAdapter extends RecyclerView.Adapter<GeeftAdapter.ViewHolder>{
         viewHolder.getGeeftDescription().setText(geeft.getDescription());
         viewHolder.getGeeftDescription().setSingleLine(true);
         viewHolder.getGeeftDescription().setEllipsize(TextUtils.TruncateAt.END);
+        viewHolder.setViewHolderContext(mContext);
 
-
-        //Every listened of the card , need to initialize here
-        //Image Buttons///////////////
-        viewHolder.getGeeftReservationButton().setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(mContext, "Reservation button to set", Toast.LENGTH_SHORT).show();
-                viewHolder.getGeeftReservationButton().setColorFilter(R.color.colorAccent);
-            }
-        });
-        //////////////////////////////
-
-        //Text Dialog/////////////////
-        viewHolder.getGeefterName().setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                AlertDialog.Builder alertDialog = new AlertDialog.Builder(mContext); //Read Update
-                alertDialog.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        // here you can add functions
-                    }
-                });
-
-                //On click, the user visualize can visualize some infos about the geefter
-                AlertDialog dialog = alertDialog.create();
-                dialog.setTitle(viewHolder.getGeefterName().getText());
-                dialog.setMessage("Some information that we can take from the facebook shared one");
-
-                dialog.show();  //<-- See This!
-            }
-        });
-        //////////////////////////////
-
-        //Text Expander///////////////
-        viewHolder.getGeeftDescription().setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                viewHolder.getGeeftDescription().setSingleLine(false);
-            }
-        });
-        //////////////////////////////
 
 //        viewHolder.mGeeftImage.setImageDrawable(mContext.getDrawable(geeft.getImageResourceId(mContext)));
 
@@ -118,6 +77,11 @@ public class GeeftAdapter extends RecyclerView.Adapter<GeeftAdapter.ViewHolder>{
         private TextView mGeeftDescription;
         private ImageView mGeeftImage;
         private ImageButton mGeeftReservationButton;
+        private Context mViewHolderContext;
+
+        public void setViewHolderContext(Context viewHolderContext) {
+            mViewHolderContext = viewHolderContext;
+        }
 
         public TextView getGeeftName() {
             return mGeeftName;
@@ -150,6 +114,51 @@ public class GeeftAdapter extends RecyclerView.Adapter<GeeftAdapter.ViewHolder>{
             mGeeftDescription = (TextView) itemView.findViewById(R.id.geeft_description);
             mGeeftImage = (ImageView) itemView.findViewById(R.id.geeft_image);
             mGeeftReservationButton = (ImageButton) itemView.findViewById(R.id.geeft_like_reservation_button);
+
+
+
+            //Every listened of the card , need to initialize here
+            //Image Buttons///////////////
+            mGeeftReservationButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Toast.makeText(mViewHolderContext, "Reservation button to set", Toast.LENGTH_SHORT).show();
+                    mGeeftReservationButton.setColorFilter(R.color.colorAccent);
+                }
+            });
+            //////////////////////////////
+
+            //Text Dialog/////////////////
+            getGeefterName().setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    AlertDialog.Builder alertDialog = new AlertDialog.Builder(mViewHolderContext); //Read Update
+                    alertDialog.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            //here you can add functions
+                        }
+                    });
+
+                    //On click, the user visualize can visualize some infos about the geefter
+                    AlertDialog dialog = alertDialog.create();
+                    dialog.setTitle(getGeefterName().getText());
+                    dialog.setMessage("Some information that we can take from the facebook shared one");
+
+                    dialog.show();  //<-- See This!
+                }
+            });
+            //////////////////////////////
+
+            //Text Expander///////////////
+            mGeeftDescription.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    getGeeftDescription().setSingleLine(false);
+                }
+            });
+            //////////////////////////////
+
         }
 
     }

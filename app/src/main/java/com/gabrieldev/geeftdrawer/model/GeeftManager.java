@@ -35,10 +35,10 @@ public class GeeftManager {
                 geefterName = geefterArray[i];
                 geeftName = geeftArray[i];
                 Geeft geeft = new Geeft();
-                geeft.geefter = geefterName;
-                geeft.name = geeftName;
-                geeft.description = loremIpsum;
-                geeft.imageName = geeftName.replaceAll("\\s+","").toLowerCase();
+                geeft.setGeefter(geefterName);
+                geeft.setName(geeftName);
+                geeft.setDescription(loremIpsum);
+                geeft.setImageName(geeftName.replaceAll("\\s+","").toLowerCase());
                 countries.add(geeft);
             }
         }
